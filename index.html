@@ -54,22 +54,22 @@
 
 <!-- Screen 1 -->
 <div class="screen show" id="s1">
-  <h1>Hey <span class="name"></span>… 🥺</h1>
+  <h1>Hey <span class="manuu"></span>… </h1>
   <p>I did something silly and I know you are upset.<br>Can you give me 1 minute?</p>
   <button onclick="showScreen('s2')">Okay, say it</button>
 </div>
 
 <!-- Screen 2 -->
 <div class="screen" id="s2">
-  <h1>Are you still mad at me? 😤</h1>
+  <h1>Are you still mad at me? </h1>
   <p id="msg">Be honest...</p>
   <button id="madBtn">Yes, still mad</button>
-  <button id="okBtn" onclick="showScreen('s3')">Not anymore 🥰</button>
+  <button id="okBtn" onclick="showScreen('s3')">Not anymore </button>
 </div>
 
 <!-- Screen 3 -->
 <div class="screen" id="s3">
-  <h1>Official Apology Terms 📜</h1>
+  <h1>Official Apology Terms </h1>
   <div class="box" id="reason"></div>
   <p id="counter"></p>
   <button id="nextBtn" onclick="nextReason()">Next</button>
@@ -77,7 +77,7 @@
 
 <!-- Screen 4 -->
 <div class="screen" id="s4">
-  <h1>Your coupons 🎟️</h1>
+  <h1>Your coupons </h1>
   <p>Tap each one to open it</p>
   <div id="couponList"></div>
   <button onclick="showScreen('s5')">Continue</button>
@@ -85,37 +85,37 @@
 
 <!-- Screen 5 -->
 <div class="screen" id="s5">
-  <h1>One last thing 💌</h1>
+  <h1>One last thing </h1>
   <p id="letter"></p>
   <p><b>- <span id="him"></span></b></p>
-  <button onclick="showScreen('s6')">Forgive me? ❤️</button>
+  <button onclick="showScreen('s6')">Forgive me? </button>
 </div>
 
 <!-- Screen 6 -->
 <div class="screen" id="s6">
-  <h1>Thank you <span class="name"></span> ❤️</h1>
-  <p>I promise to listen more and be better.<br>I love you! 😘</p>
+  <h1>Thank you <span class="name"></span> </h1>
+  <p>I promise to listen more and be better.<br>I love you! </p>
   <p style="font-size:40px" id="hearts"></p>
 </div>
 
 <script>
   // ---- Change these ----
-  var herName = "Babe";
-  var myName = "Your Name";
+  var herName = "manuue";
+  var myName = "your love ";
 
   var reasons = [
-    "I was wrong, and I am really sorry. 🥺",
-    "I love you ❤️",
-    "I will listen properly and not just say 'hmm' 🙈",
+    "I was wrong, and I am really sorry. ",
+    "I love you soo much",
+    "I will listen properly and not just say 'hmm' ",
     "I will try to be better every day.",
-    "Terms accepted by hugs. No refunds. 🤗"
+    "Terms accepted by hugs. No refunds. "
   ];
 
   var coupons = [
-    "🍕 One dinner of your choice (I pay)",
-    "🎬 Movie night, you choose",
-    "🤗 Unlimited hugs",
-    "🍫 One chocolate when you are upset"
+    " One dinner of your choice (I pay)",
+    " Movie night, you choose",
+    " Unlimited hugs",
+    " One chocolate when you are upset"
   ];
 
   var letterText = "I know I hurt you, and I am really sorry. " +
@@ -141,7 +141,7 @@
 
     if (id == "s3") { showReason(); }
     if (id == "s4") { makeCoupons(); }
-    if (id == "s6") { document.getElementById("hearts").textContent = "💖💕💗💖💕💗"; }
+    if (id == "s6") { document.getElementById("hearts").textContent = ""; }
   }
 
   // ---- Screen 2: "still mad" button ----
@@ -150,11 +150,11 @@
   var tries = 0;
 
   var sadMessages = [
-    "Fair. I deserve this 😔",
-    "I will buy you chocolate 🍫",
-    "My phone is at 1% and so is my hope 🔋",
-    "Please? I will be your food delivery guy 🍕",
-    "Okay the other button is getting bigger, just press it 👀"
+    "Fair. I deserve this ",
+    "I will buy you chocolate ",
+    "My phone is at 1% and so is my hope ",
+    "Please? I will be your food delivery guy ",
+    "Okay the other button is getting bigger, just press it "
   ];
 
   function madClicked() {
@@ -169,7 +169,7 @@
     madBtn.style.position = "fixed";
     madBtn.style.left = Math.random() * (window.innerWidth - 160) + "px";
     madBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
-    document.getElementById("msg").textContent = "Haha you can't catch it 😝";
+    document.getElementById("msg").textContent = "Haha you can't catch it ";
   }
 
   madBtn.addEventListener("click", madClicked);
@@ -182,7 +182,7 @@
     document.getElementById("reason").textContent = reasons[r];
     document.getElementById("counter").textContent = (r + 1) + " / " + reasons.length;
     if (r == reasons.length - 1) {
-      document.getElementById("nextBtn").textContent = "Accept terms ❤️";
+      document.getElementById("nextBtn").textContent = "Accept terms ";
     }
   }
   function nextReason() {
@@ -201,7 +201,7 @@
     for (let i = 0; i < coupons.length; i++) {
       let d = document.createElement("div");
       d.className = "box coupon";
-      d.textContent = "🎁 Coupon " + (i + 1) + " (tap me)";
+      d.textContent = " Coupon " + (i + 1) + " (tap me)";
       d.onclick = function () { d.textContent = coupons[i]; };
       list.appendChild(d);
     }
