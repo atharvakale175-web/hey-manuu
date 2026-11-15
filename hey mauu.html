@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sorry ❤️</title>
+<style>
+  :root {
+    --bg: #ffe6ee;
+    --text: #333;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #3a1a26; --text: #fff; }
+  }
+  :root[data-theme="dark"] { --bg: #3a1a26; --text: #fff; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 40px 20px;
+  }
+  .screen { display: none; }
+  .show { display: block; }
+  h1 { font-size: 30px; }
+  p { font-size: 18px; }
+  button {
+    font-size: 18px;
+    padding: 10px 22px;
+    margin: 8px;
+    border: none;
+    border-radius: 8px;
+    background: #e91e63;
+    color: white;
+    cursor: pointer;
+  }
+  #madBtn { background: #999; }
+  .box {
+    border: 2px dashed #e91e63;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 12px auto;
+    max-width: 320px;
+  }
+  .coupon { cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- Screen 1 -->
+<div class="screen show" id="s1">
+  <h1>Hey <span class="name"></span>… 🥺</h1>
+  <p>I did something silly and I know you are upset.<br>Can you give me 1 minute?</p>
+  <button onclick="showScreen('s2')">Okay, say it</button>
+</div>
+
+<!-- Screen 2 -->
+<div class="screen" id="s2">
+  <h1>Are you still mad at me? 😤</h1>
+  <p id="msg">Be honest...</p>
+  <button id="madBtn">Yes, still mad</button>
+  <button id="okBtn" onclick="showScreen('s3')">Not anymore 🥰</button>
+</div>
+
+<!-- Screen 3 -->
+<div class="screen" id="s3">
+  <h1>Official Apology Terms 📜</h1>
+  <div class="box" id="reason"></div>
+  <p id="counter"></p>
+  <button id="nextBtn" onclick="nextReason()">Next</button>
+</div>
+
+<!-- Screen 4 -->
+<div class="screen" id="s4">
+  <h1>Your coupons 🎟️</h1>
+  <p>Tap each one to open it</p>
+  <div id="couponList"></div>
+  <button onclick="showScreen('s5')">Continue</button>
+</div>
+
+<!-- Screen 5 -->
+<div class="screen" id="s5">
+  <h1>One last thing 💌</h1>
+  <p id="letter"></p>
+  <p><b>- <span id="him"></span></b></p>
+  <button onclick="showScreen('s6')">Forgive me? ❤️</button>
+</div>
+
+<!-- Screen 6 -->
+<div class="screen" id="s6">
+  <h1>Thank you <span class="name"></span> ❤️</h1>
+  <p>I promise to listen more and be better.<br>I love you! 😘</p>
+  <p style="font-size:40px" id="hearts"></p>
+</div>
+
+<script>
+  // ---- Change these ----
+  var herName = "Babe";
+  var myName = "Your Name";
+
+  var reasons = [
+    "I was wrong, and I am really sorry. 🥺",
+    "I love you ❤️",
+    "I will listen properly and not just say 'hmm' 🙈",
+    "I will try to be better every day.",
+    "Terms accepted by hugs. No refunds. 🤗"
+  ];
+
+  var coupons = [
+    "🍕 One dinner of your choice (I pay)",
+    "🎬 Movie night, you choose",
+    "🤗 Unlimited hugs",
+    "🍫 One chocolate when you are upset"
+  ];
+
+  var letterText = "I know I hurt you, and I am really sorry. " +
+    "You are the best part of my day, even when you are mad at me. " +
+    "I want to learn and be better for you. Please forgive me?";
+  // ----------------------
+
+  // put names on the page
+  var names = document.getElementsByClassName("name");
+  for (var i = 0; i < names.length; i++) {
+    names[i].textContent = herName;
+  }
+  document.getElementById("him").textContent = myName;
+  document.getElementById("letter").textContent = letterText;
+
+  // show one screen at a time
+  function showScreen(id) {
+    var all = document.getElementsByClassName("screen");
+    for (var i = 0; i < all.length; i++) {
+      all[i].classList.remove("show");
+    }
+    document.getElementById(id).classList.add("show");
+
+    if (id == "s3") { showReason(); }
+    if (id == "s4") { makeCoupons(); }
+    if (id == "s6") { document.getElementById("hearts").textContent = "💖💕💗💖💕💗"; }
+  }
+
+  // ---- Screen 2: "still mad" button ----
+  var madBtn = document.getElementById("madBtn");
+  var okBtn = document.getElementById("okBtn");
+  var tries = 0;
+
+  var sadMessages = [
+    "Fair. I deserve this 😔",
+    "I will buy you chocolate 🍫",
+    "My phone is at 1% and so is my hope 🔋",
+    "Please? I will be your food delivery guy 🍕",
+    "Okay the other button is getting bigger, just press it 👀"
+  ];
+
+  function madClicked() {
+    tries++;
+    document.getElementById("msg").textContent = sadMessages[(tries - 1) % sadMessages.length];
+    okBtn.style.fontSize = (18 + tries * 4) + "px";
+  }
+
+  function runAway(event) {
+    if (tries < 2) { return; }   // runs away only after 2 clicks
+    event.preventDefault();
+    madBtn.style.position = "fixed";
+    madBtn.style.left = Math.random() * (window.innerWidth - 160) + "px";
+    madBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+    document.getElementById("msg").textContent = "Haha you can't catch it 😝";
+  }
+
+  madBtn.addEventListener("click", madClicked);
+  madBtn.addEventListener("mouseover", runAway);
+  madBtn.addEventListener("touchstart", runAway);
+
+  // ---- Screen 3: apology terms ----
+  var r = 0;
+  function showReason() {
+    document.getElementById("reason").textContent = reasons[r];
+    document.getElementById("counter").textContent = (r + 1) + " / " + reasons.length;
+    if (r == reasons.length - 1) {
+      document.getElementById("nextBtn").textContent = "Accept terms ❤️";
+    }
+  }
+  function nextReason() {
+    if (r < reasons.length - 1) {
+      r++;
+      showReason();
+    } else {
+      showScreen("s4");
+    }
+  }
+
+  // ---- Screen 4: coupons ----
+  function makeCoupons() {
+    var list = document.getElementById("couponList");
+    if (list.children.length > 0) { return; }
+    for (let i = 0; i < coupons.length; i++) {
+      let d = document.createElement("div");
+      d.className = "box coupon";
+      d.textContent = "🎁 Coupon " + (i + 1) + " (tap me)";
+      d.onclick = function () { d.textContent = coupons[i]; };
+      list.appendChild(d);
+    }
+  }
+</script>
+
+</body>
+</html>
